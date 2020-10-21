@@ -1,8 +1,7 @@
 <?php
+declare(strict_types=1);
 
-
-namespace App\Ria\Bundle\PostBundle;
-
+namespace Ria\Bundle\PostBundle;
 
 class RiaPostBundle
 {
