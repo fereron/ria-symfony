@@ -3,14 +3,23 @@ declare(strict_types=1);
 
 namespace Ria\Bundle\PostBundle\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Ria\Bundle\PostBundle\Entity\Story\Story;
+
 //use Ria\Core\Query\EntitySpecificationRepositoryTrait;
 //use Ria\News\Core\Query\Hydrator\StoryHydrator;
 //use Ria\News\Core\Query\ViewModel\StoryViewModel;
 
-class StoryRepository extends EntityRepository
+class StoryRepository extends ServiceEntityRepository
 {
 //    use EntitySpecificationRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Story::class);
+    }
 
     /**
      * @return string
