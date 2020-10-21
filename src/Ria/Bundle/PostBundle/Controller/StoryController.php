@@ -13,6 +13,8 @@ use Ria\News\Core\Forms\Story\StorySearch;
 use Ria\News\Core\Models\Story\Story;
 use Ria\News\Core\Query\Repositories\StoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -40,22 +42,25 @@ class StoryController extends AbstractController
 
 
     private StoryRepository $storyRepository;
+    private ParameterBagInterface $parameterBag;
 
-    public function __construct(StoryRepository $storyRepository)
+    public function __construct(StoryRepository $storyRepository, ParameterBagInterface $parameterBag)
     {
         $this->storyRepository = $storyRepository;
+        $this->parameterBag = $parameterBag;
     }
 
     /**
-     * @return string
+     * @Route("posts/stories", methods={"GET"})
      */
     public function actionIndex()
     {
-        $this->storyRepository->
-            createQueryBuilder('s')
+        dd($this->parameterBag->get('locale'));
+        $this->storyRepository
+            ->createQueryBuilder('s')
             ->select('s')
             ->join('s.translations', 'st', 'WITH', 'st.language = :language')
-            ->setParameter(':language', \Yii::$app->language);
+            ->setParameter(':language', $this->parameterBag->get('locale'));
 //        /** @var StoriesRepository $repository */
 //        $repository   = $this->entityManager->getRepository(Story::class);
 //        $searchModel  = new StorySearch($this->storyRepository);
