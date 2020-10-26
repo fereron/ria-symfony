@@ -8,7 +8,7 @@ services:
     volumes:
       - ./:/app:delegated
     ports:
-      - 8080:80
+      - 80:80
     depends_on:
       - php-fpm
 
@@ -34,11 +34,12 @@ services:
   mysql:
     build:
       context: ./docker
-      dockerfile: php-fpm.docker
+      dockerfile: mysql.docker
     volumes:
-      - mysql:/var/lib/mysql/data:delegated
+      - mysql:/var/lib/mysql:delegated
     environment:
       MYSQL_USER: ria
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: ria
       MYSQL_DATABASE: ria
     ports:
