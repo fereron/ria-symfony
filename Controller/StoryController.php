@@ -14,6 +14,7 @@ use Ria\News\Core\Models\Story\Story;
 use Ria\News\Core\Query\Repositories\StoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Yii;
 use yii\filters\AccessControl;
@@ -51,30 +52,32 @@ class StoryController extends AbstractController
     }
 
     /**
-     * @Route("posts/stories", methods={"GET"})
+     * @Route("posts/stories", methods={"GET"}, name="post.stories.index")
      */
-    public function actionIndex()
+    public function index(): Response
     {
-        dd($this->parameterBag->get('locale'));
-        $this->storyRepository
+        $stories = $this->storyRepository
             ->createQueryBuilder('s')
             ->select('s')
             ->join('s.translations', 'st', 'WITH', 'st.language = :language')
-            ->setParameter(':language', $this->parameterBag->get('locale'));
+            ->setParameter(':language', $this->parameterBag->get('locale'))
+            ->getQuery()
+            ->getResult();
+
 //        /** @var StoriesRepository $repository */
 //        $repository   = $this->entityManager->getRepository(Story::class);
 //        $searchModel  = new StorySearch($this->storyRepository);
 //        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-
-        return $this->render('index', compact('searchModel', 'dataProvider'));
+        return $this->render('@RiaPost/index.html.twig');
     }
 
     /**
-     * @return string|\yii\web\Response
+     * @Route("posts/stories/create", methods={"GET", "POST"}, name="post.stories.create")
      */
-    public function actionCreate()
+    public function create(): Response
     {
+        dd('create');
         $form = StoryForm::create();
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {

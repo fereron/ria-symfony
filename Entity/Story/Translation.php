@@ -1,17 +1,17 @@
 <?php
 
-namespace Ria\News\Core\Models\Story;
+namespace Ria\Bundle\PostBundle\Entity\Story;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\UniqueConstraint;
-use Ria\Core\Models\Meta;
+//use Ria\Core\Models\Meta;
 use Ria\News\Core\Models\Story\Traits\TranslationLifecycleCallbacks;
 
 /**
  * @ORM\Table(name="stories_lang", uniqueConstraints={@UniqueConstraint(name="slug", columns={"slug", "language"})})
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks()
+// * @ORM\HasLifecycleCallbacks()
  */
 class Translation
 {
@@ -44,13 +44,13 @@ class Translation
      */
     public $language;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $meta;
+//    /**
+//     * @ORM\Column(type="text")
+//     */
+//    private $meta;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Ria\News\Core\Models\Story\Story", inversedBy="translations")
+     * @ORM\ManyToOne(targetEntity="Ria\Bundle\PostBundle\Entity\Story\Story", inversedBy="translations")
      * @JoinColumn(name="story_id", referencedColumnName="id")
      */
     private $story;
