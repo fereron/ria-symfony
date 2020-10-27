@@ -22,25 +22,7 @@ use yii\web\NotFoundHttpException;
 
 class StoryController extends AbstractController
 {
-//
-//    /**
-//     * @inheritDoc
-//     */
-//    public function behaviors(): array
-//    {
-//        return [
-//            'access' => [
-//                'class' => AccessControl::class,
-//                'rules' => [
-//                    [
-//                        'allow'       => true,
-//                        'permissions' => ['manageStories']
-//                    ],
-//                ],
-//            ],
-//        ];
-//    }
-
+    // todo manageStories permission
 
     private StoryRepository $storyRepository;
     private ParameterBagInterface $parameterBag;
@@ -60,7 +42,7 @@ class StoryController extends AbstractController
             ->createQueryBuilder('s')
             ->select('s')
             ->join('s.translations', 'st', 'WITH', 'st.language = :language')
-            ->setParameter(':language', $this->parameterBag->get('locale'))
+            ->setParameter(':language', $this->parameterBag->get('app.locale'))
             ->getQuery()
             ->getResult();
 
@@ -69,7 +51,7 @@ class StoryController extends AbstractController
 //        $searchModel  = new StorySearch($this->storyRepository);
 //        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('@RiaPost/index.html.twig');
+        return $this->render('@RiaPost/stories/index.html.twig');
     }
 
     /**
