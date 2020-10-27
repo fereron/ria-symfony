@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Ria\Bundle\AdminBundle\DependencyInjection;
+namespace Ria\Bundle\WebBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
 
-class RiaPostExtension extends Extension
+class RiaWebExtension extends Extension
 {
 
     public function load(array $configs, ContainerBuilder $container)

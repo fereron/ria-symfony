@@ -1,0 +1,3 @@
+ria_web:
+  resource: "@RiaWebBundle/Controller"
+  type: annotation

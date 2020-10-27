@@ -1,8 +1,6 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+admin:
+  host: '%domain.admin%'
+  resource: '@RiaAdminBundle/Resources/config/routing.yml'
 
-phpdish_forum:
-  resource: "@RiaPostBundle/Controller/"
-  prefix: /
-  type: annotation
+frontend:
+  resource: '@RiaWebBundle/Resources/config/routing.yml'

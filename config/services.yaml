@@ -4,9 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'az'
-    app_locales: az|ru|en
-
+    app.locale: 'az'
+    app.supported_locales: ['az', 'ru', 'en']
+    domain: '%env(resolve:DOMAIN)%'
+    domain.admin: '%env(resolve:DOMAIN_ADMIN)%'
 
 services:
     # default configuration for services in *this* file

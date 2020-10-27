@@ -15,4 +15,5 @@ return [
 
     Ria\Bundle\PostBundle\RiaPostBundle::class => ['all' => true],
     Ria\Bundle\AdminBundle\RiaAdminBundle::class => ['all' => true],
+    Ria\Bundle\WebBundle\RiaWebBundle::class => ['all' => true],
 ];

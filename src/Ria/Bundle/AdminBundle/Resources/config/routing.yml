@@ -1,0 +1,7 @@
+ria_admin:
+  resource: "@RiaAdminBundle/Controller/"
+  type: annotation
+
+ria_posts:
+  resource: "@RiaPostBundle/Controller/"
+  type: annotation
