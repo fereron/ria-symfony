@@ -1,10 +1,23 @@
 FROM php:7.4-cli
 
-RUN apt-get update && apt-get install -y libzip-dev libpq-dev zlib1g-dev zip \
+ARG user=appuser
+
+RUN apt-get update && apt-get install -y libzip-dev libpq-dev zlib1g-dev zip git \
     && docker-php-ext-install pdo pdo_mysql mysqli zip
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --quiet
+# Installing composer.
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer --quiet
 
-ENV COMPOSER_ALLOW_SUPERUSER 1
+# Creating user for container.
+RUN groupadd -g 1000 $user && useradd -r -u 1000 -g $user $user
+
+# Making directory for user.
+RUN mkdir -p /home/$user && chown -R $user:$user /home/$user && chmod -R 755 /home/$user
+
+# Running container as user
+USER $user
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_NO_INTERACTION=1
 
 WORKDIR /app

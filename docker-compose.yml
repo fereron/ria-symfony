@@ -1,51 +1,60 @@
-version: '3.3'
+version: '3.8'
 
 services:
   nginx:
+    container_name: nginx
     build:
       context: ./docker
       dockerfile: nginx.docker
     volumes:
-      - ./:/app:delegated
+      - .:/app:delegated
     ports:
-      - 80:80
+      - 8080:80
     depends_on:
       - php-fpm
 
   php-fpm:
+    container_name: php-fpm
     build:
       context: ./docker
       dockerfile: php-fpm.docker
     volumes:
-      - ./:/app:delegated
+      - .:/app:delegated
     depends_on:
       - mysql
 
   php-cli:
+    container_name: php-cli
     build:
       context: ./docker
       dockerfile: php-cli.docker
     volumes:
-      - ./:/app:delegated
-      - composer:/root/.composer/cache:delegated
+      - .:/app:delegated
+      - composer_cache:/home/appuser/.composer/cache:delegated
     depends_on:
       - mysql
 
   mysql:
+    container_name: mysql
     build:
       context: ./docker
       dockerfile: mysql.docker
     volumes:
-      - mysql:/var/lib/mysql:delegated
+      - mysql_data:/var/lib/mysql:delegated
     environment:
       MYSQL_USER: ria
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: ria
       MYSQL_DATABASE: ria
+      SERVICE_NAME: mysql
+      TZ: Asia/Baku
+    restart: unless-stopped
+    tty: true
     ports:
       - 3308:3306
 
   phpmyadmin:
+    container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin:fpm-alpine
     ports:
       - 8020:80
@@ -53,5 +62,5 @@ services:
       - mysql
 
 volumes:
-  mysql:
-  composer:
+  mysql_data:
+  composer_cache:
