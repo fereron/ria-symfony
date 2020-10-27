@@ -3,10 +3,9 @@
 namespace Ria\Bundle\PostBundle\Entity\Story;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\OrderBy;
+//use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Mapping as ORM;
-//use Ria\Core\Models\Entity;
 
 /**
  * @ORM\Table(name="stories")
@@ -41,7 +40,7 @@ class Story
 
     /**
      * @ORM\OneToMany(
-     *     targetEntity="\Ria\News\Core\Models\Story\Translation",
+     *     targetEntity="Ria\Bundle\PostBundle\Entity\Story\Translation",
      *     mappedBy="story",
      *     cascade={"persist", "remove"},
      *     indexBy="language"

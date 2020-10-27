@@ -14,4 +14,5 @@ return [
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
 
     Ria\Bundle\PostBundle\RiaPostBundle::class => ['all' => true],
+    Ria\Bundle\AdminBundle\RiaAdminBundle::class => ['all' => true],
 ];
