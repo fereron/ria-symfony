@@ -1,0 +1,112 @@
+body {
+    padding-top: 0;
+}
+
+.site-navbar {
+    width: 260px;
+}
+
+.navbar-brand a > .navbar-brand-text {
+    font-family: Roboto, sans-serif;
+    color: #fff;
+    cursor: pointer;
+}
+
+.gridview table th {
+    font-weight: bold;
+}
+
+.gridview table th > a {
+    text-decoration: none;
+}
+
+.form-group .help-block.help-block-error {
+    color: #d62b2b;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.char-counter {
+    margin-top: -18px;
+    font-size: 12px;
+}
+
+.char-counter .__counter.has-error {
+    color: red;
+}
+
+.toggle-view {
+    height: 0;
+    overflow: hidden;
+}
+
+.toggle-view.active {
+    height: auto;
+}
+
+.video-preview {
+    height: 252px;
+    background-color: #cccccc;
+}
+
+.checkbox-custom .custom-checkbox {
+    margin-bottom: 10px;
+}
+
+/* ***** -- logs ***** */
+#log .nav-tabs {
+    border: none;
+}
+
+#log del {
+    display: inline-block;
+    padding: 3px;
+    color: #fff;
+    background-color: #e47878;
+}
+
+#log ins {
+    display: inline-block;
+    padding: 3px;
+    color: #fff;
+    background-color: #78cc78;
+}
+
+.footer-actions {
+    display: flex;
+}
+
+.footer-actions > li {
+    width: 33.333333%;
+    height: 76px;
+}
+
+.footer-actions > li > a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    width: 100%;
+    height: inherit;
+    background: #e0e0e0;
+}
+
+.footer-actions a:hover {
+    background: #d3d3d3;
+}
+
+@media (max-width: 1200px) {
+    .site-navbar {
+        width: 90px;
+    }
+}
+
+@media (max-width: 767px) {
+    .site-navbar {
+        width: 100%;
+    }
+
+    .page {
+        padding-top: 66px;
+    }
+}
