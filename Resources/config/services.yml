@@ -13,3 +13,8 @@ services:
   Ria\Bundle\PostBundle\Controller\:
       resource: "../../Controller"
       tags: ['controller.service_arguments']
+
+  handler.story:
+    class: Ria\Bundle\PostBundle\Handler\StoryHandler
+    tags:
+      - { name: tactician.handler, typehints: true }

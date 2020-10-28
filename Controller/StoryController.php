@@ -4,21 +4,15 @@ declare(strict_types=1);
 namespace Ria\Bundle\PostBundle\Controller;
 
 use Doctrine\ORM\QueryBuilder;
+use League\Tactician\CommandBus;
+use Ria\Bundle\PostBundle\Command\Story\StoryCreateCommand;
+use Ria\Bundle\PostBundle\Form\Type\StoryType;
 use Ria\Bundle\PostBundle\Repository\StoryRepository;
-use Ria\News\Core\Commands\Story\CreateStoryCommand;
-use Ria\News\Core\Commands\Story\DeleteStoryCommand;
-use Ria\News\Core\Commands\Story\UpdateStoryCommand;
-use Ria\News\Core\Forms\Story\StoryForm;
-use Ria\News\Core\Forms\Story\StorySearch;
-use Ria\News\Core\Models\Story\Story;
-use Ria\News\Core\Query\Repositories\StoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Yii;
-use yii\filters\AccessControl;
-use yii\web\NotFoundHttpException;
 
 class StoryController extends AbstractController
 {
@@ -26,11 +20,13 @@ class StoryController extends AbstractController
 
     private StoryRepository $storyRepository;
     private ParameterBagInterface $parameterBag;
+    private CommandBus $bus;
 
-    public function __construct(StoryRepository $storyRepository, ParameterBagInterface $parameterBag)
+    public function __construct(StoryRepository $storyRepository, CommandBus $bus, ParameterBagInterface $parameterBag)
     {
         $this->storyRepository = $storyRepository;
         $this->parameterBag = $parameterBag;
+        $this->bus = $bus;
     }
 
     /**
@@ -56,19 +52,25 @@ class StoryController extends AbstractController
 
     /**
      * @Route("posts/stories/create", methods={"GET", "POST"}, name="post.stories.create")
+     *
+     * @param Request $request
+     * @return Response
      */
-    public function create(): Response
+    public function create(Request $request): Response
     {
-        dd('create');
-        $form = StoryForm::create();
+        $command = new StoryCreateCommand;
 
-        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-            $this->bus->handle(new CreateStoryCommand($form));
+        $form = $this->createForm(StoryType::class, $command);
+        $form->handleRequest($request);
 
-            return $this->redirect(['index']);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->bus->handle($command);
+            return $this->redirectToRoute('posts/stories');
         }
 
-        return $this->render('create', ['model' => $form]);
+        return $this->render('@RiaPost/stories/create.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
