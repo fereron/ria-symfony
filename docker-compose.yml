@@ -55,9 +55,12 @@ services:
 
   phpmyadmin:
     container_name: phpmyadmin
-    image: phpmyadmin/phpmyadmin:fpm-alpine
+    image: phpmyadmin/phpmyadmin:latest
     ports:
       - 8020:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
     depends_on:
       - mysql
 

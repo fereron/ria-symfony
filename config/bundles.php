@@ -12,6 +12,7 @@ return [
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
+    League\Tactician\Bundle\TacticianBundle::class => ['all' => true],
 
     Ria\Bundle\PostBundle\RiaPostBundle::class => ['all' => true],
     Ria\Bundle\AdminBundle\RiaAdminBundle::class => ['all' => true],

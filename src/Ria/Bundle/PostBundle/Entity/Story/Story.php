@@ -14,25 +14,28 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Story
 {
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $cover;
+
     /**
      * @ORM\Column(type="boolean")
      */
     private $status;
+
     /**
      * @ORM\Column(type="boolean")
      */
     private $show_on_site;
+
     /**
      * @ORM\Column(type="datetime")
      */
