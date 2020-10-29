@@ -8,9 +8,8 @@ use Ria\Bundle\PostBundle\Command\Story\StoryCreateCommand;
 class StoryHandler
 {
 
-    public function handleStoryCreate(StoryCreateCommand $command)
+    public function handle(StoryCreateCommand $command)
     {
-
 
         dd('handled story command', $command);
     }

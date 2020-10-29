@@ -8,19 +8,29 @@ use Symfony\Component\Validator\Constraints as Assert;
 class StoryCreateCommand
 {
     /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     * @Assert\Length(max=255)
+     * @var bool
+     * @Assert\Type("boolean")
      */
-    public string $title;
+    public bool $status;
 
     /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     * @Assert\Length(max=255)
+     * @var array StoryTranslationCommand
      */
-    public string $slug;
+    public array $translations;
+
+    public function __construct(array $locales)
+    {
+        $translations = [];
+
+        foreach ($locales as $locale) {
+            $translations[$locale] = new StoryTranslationCommand($locale);
+
+//            $translations[$languageCode] = $story
+//                ? TranslationForm::create($story->getTranslation($languageCode))
+//                : TranslationForm::create(null, ['language' => $languageCode]);
+        }
+
+        $this->translations = $translations;
+    }
 
 }
