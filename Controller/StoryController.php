@@ -6,7 +6,7 @@ namespace Ria\Bundle\PostBundle\Controller;
 use Doctrine\ORM\QueryBuilder;
 use League\Tactician\CommandBus;
 use Ria\Bundle\PostBundle\Command\Story\StoryCreateCommand;
-use Ria\Bundle\PostBundle\Form\Type\StoryType;
+use Ria\Bundle\PostBundle\Form\Story\Type\StoryType;
 use Ria\Bundle\PostBundle\Repository\StoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -58,9 +58,11 @@ class StoryController extends AbstractController
      */
     public function create(Request $request): Response
     {
-        $command = new StoryCreateCommand;
+        $command = new StoryCreateCommand($this->parameterBag->get('app.supported_locales'));
 
         $form = $this->createForm(StoryType::class, $command);
+
+//        dd($form);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

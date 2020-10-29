@@ -18,3 +18,7 @@ services:
     class: Ria\Bundle\PostBundle\Handler\StoryHandler
     tags:
       - { name: tactician.handler, typehints: true }
+
+#  twig_extension.admin:
+#    class: Ria\Bundle\PostBundle\Twig\FlagIconExtension
+#    tags: [ 'twig.extension' ]
