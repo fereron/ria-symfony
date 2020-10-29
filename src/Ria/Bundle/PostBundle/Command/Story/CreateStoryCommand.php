@@ -1,11 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Ria\Bundle\PostBundle\Command\Story;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class StoryCreateCommand
+/**
+ * Class CreateStoryCommand
+ * @package Ria\Bundle\PostBundle\Command\Story
+ */
+class CreateStoryCommand
 {
     /**
      * @var string
@@ -22,5 +27,4 @@ class StoryCreateCommand
      * @Assert\Length(max=255)
      */
     public string $slug;
-
 }

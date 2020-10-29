@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ria\Bundle\UserBundle\Controller;
 
+use League\Tactician\CommandBus;
 use Ria\Bundle\UserBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,17 +20,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class UserController extends AbstractController
 {
+    private CommandBus $bus;
+
+    public function __construct(CommandBus $bus)
+    {
+        $this->bus = $bus;
+    }
+
     /**
      * @Route("/", methods={"GET"}, name="index")
      * @return Response
      */
     public function index(): Response
     {
-        return new Response("<h1>Welcome to users !</h1>");
+        return $this->render('@RiaUser/users/index.html.twig');
     }
 
     /**
-     * @Route("/create", methods={"GET, POST"}, name="create")
+     * @Route("/create", methods={"GET", "POST"}, name="create")
      * @param Request $request
      * @return Response
      */
@@ -40,11 +48,11 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $this->bus->handle($command);
+            $this->bus->handle($command);
             return $this->redirectToRoute('users.index');
         }
 
-        return $this->render('@RiaUser/users/index.html.twig', [
+        return $this->render('@RiaUser/users/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }

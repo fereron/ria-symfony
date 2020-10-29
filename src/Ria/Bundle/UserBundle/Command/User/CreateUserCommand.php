@@ -18,5 +18,5 @@ class CreateUserCommand
      * @Assert\Type("string")
      * @Assert\Length(max=100)
      */
-    private string $email;
+    public string $email;
 }

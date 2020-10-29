@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Ria\Bundle\UserBundle\Handlers\User;
+namespace Ria\Bundle\UserBundle\Handler\User;
 
 use Ria\Bundle\UserBundle\Command\User\CreateUserCommand;
 
@@ -13,6 +14,6 @@ class CreateUserHandler
 {
     public function handle(CreateUserCommand $command)
     {
-        var_dump($command); exit(0);
+        dd($command);
     }
 }
