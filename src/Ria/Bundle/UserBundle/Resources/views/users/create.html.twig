@@ -1,0 +1,22 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel">
+                <div class="panel-body">
+                    {{ form_row(form.email) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel">
+                <div class="panel-body">
+                    {{ form_row(form.submit, { 'label': 'Submit' }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
