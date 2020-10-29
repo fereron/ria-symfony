@@ -14,7 +14,8 @@ services:
       resource: "../../Controller"
       tags: ['controller.service_arguments']
 
-  handler.story:
-    class: Ria\Bundle\PostBundle\Handler\StoryHandler
+
+  create.story.handler:
+    class: Ria\Bundle\PostBundle\Handler\Story\CreateStoryHandler
     tags:
       - { name: tactician.handler, typehints: true }

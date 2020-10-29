@@ -5,7 +5,7 @@ namespace Ria\Bundle\PostBundle\Controller;
 
 use Doctrine\ORM\QueryBuilder;
 use League\Tactician\CommandBus;
-use Ria\Bundle\PostBundle\Command\Story\StoryCreateCommand;
+use Ria\Bundle\PostBundle\Command\Story\CreateStoryCommand;
 use Ria\Bundle\PostBundle\Form\Type\StoryType;
 use Ria\Bundle\PostBundle\Repository\StoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,7 +58,7 @@ class StoryController extends AbstractController
      */
     public function create(Request $request): Response
     {
-        $command = new StoryCreateCommand;
+        $command = new CreateStoryCommand;
 
         $form = $this->createForm(StoryType::class, $command);
         $form->handleRequest($request);
