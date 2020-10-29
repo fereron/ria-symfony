@@ -5,3 +5,7 @@ ria_admin:
 ria_posts:
   resource: "@RiaPostBundle/Controller/"
   type: annotation
+
+ria_users:
+    resource: "@RiaUserBundle/Controller/"
+    type: annotation
