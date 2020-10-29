@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y libzip-dev libpq-dev zlib1g-dev zip git
     && docker-php-ext-install pdo pdo_mysql mysqli zip
 
 # Installing composer.
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer --quiet
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --quiet
 
 # Creating user for container.
 RUN groupadd -g 1000 $user && useradd -r -u 1000 -g $user $user
