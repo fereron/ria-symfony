@@ -1,7 +1,13 @@
 FROM php:7.4-fpm
 
-RUN apt-get update && apt-get install -y libpq-dev zlib1g-dev \
-    && docker-php-ext-install pdo pdo_mysql mysqli
+# Installing libraries
+RUN apt-get update && apt-get install -y libpq-dev zlib1g-dev
+
+# Installing php extensions
+RUN docker-php-ext-install pdo pdo_mysql mysqli intl bcmath
+
+# Configuring php extensions
+RUN docker-php-ext-configure intl
 
 # Creating user for container.
 RUN groupadd -g 1000 appuser && useradd -r -u 1000 -g appuser appuser
