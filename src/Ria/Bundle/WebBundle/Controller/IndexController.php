@@ -18,7 +18,6 @@ class IndexController extends AbstractController
      */
     public function index()
     {
-
         return new Response("<h1>Welcome to the homepage !</h1>");
     }
 }
