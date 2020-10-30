@@ -33,6 +33,4 @@ class CreateStoryCommand
         $this->translations = $translations;
     }
 
-
-
 }
