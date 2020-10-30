@@ -5,7 +5,7 @@ namespace Ria\Bundle\PostBundle\Command\Story;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class StoryCreateCommand
+class CreateStoryCommand
 {
     /**
      * @var bool
